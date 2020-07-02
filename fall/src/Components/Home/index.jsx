@@ -31,7 +31,7 @@ const Home = () => {
       .then((doc) => {
         console.log(doc.data);
         const iconcode = doc.data.weather[0].icon;
-        setWeatherIcon(`http://openweathermap.org/img/wn/${iconcode}@2x.png`);
+        setWeatherIcon(`https://openweathermap.org/img/wn/${iconcode}@2x.png`);
         setWeatherDataMain(doc.data.main);
         setWeatherData(doc.data);
         setWeather(doc.data.weather[0]);
