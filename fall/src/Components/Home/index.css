@@ -1,0 +1,97 @@
+.base {
+  background-color: teal;
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
+}
+
+.search {
+  padding: 20px 10% 20px 10%;
+  padding-top: 30px;
+}
+
+.searchBarStyle {
+  width: 100%;
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  background: #008080;
+  box-shadow: 21px 21px 42px #006d6d, -21px -21px 42px #009393;
+}
+
+.search .ant-input {
+  background: none;
+  border: none;
+}
+
+.cardHolder {
+  margin-top: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  height: 300px;
+}
+
+.weatherCard {
+  border-radius: 10px;
+  background: #008080;
+  box-shadow: 21px 21px 42px #006d6d, -21px -21px 42px #009393;
+  border: none;
+  min-width: 300px;
+  width: 500px;
+  height: 200px;
+  margin: 0px 20px 0px 20px;
+}
+
+.weatherCard .ant-card-body {
+  padding: 15px;
+}
+
+.weatherCard .placeName {
+  font-size: large;
+  font-weight: bold;
+  color: rgba(230, 230, 230, 0.842);
+  text-align: center;
+}
+
+.tempDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.tempDisplay .tempDigit {
+  font-size: 55px;
+}
+
+.imageHolder {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+}
+
+.searchingImage {
+  width: 300px;
+}
+
+.statsHolder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  height: 200px;
+  width: 100%;
+}
+
+.statsBox {
+  width: 300px;
+}
