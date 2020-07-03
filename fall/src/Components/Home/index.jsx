@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./index.css";
-import { Link } from "react-router-dom";
-import { Input, Button, Card } from "antd";
+import { Input, Card, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import axios from "axios";
 import Searching from "./Assets/search.svg";
 import Insta from "./Assets/insta.svg";
 import Git from "./Assets/git.svg";
 import In from "./Assets/in.svg";
+import Pin from "./Assets/pin.svg";
 
 const Home = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -17,6 +17,7 @@ const Home = () => {
   const [weather, setWeather] = useState([]);
   const [wind, setWind] = useState([]);
   const [data, setData] = useState(false);
+  const [load, setLoad] = useState(false);
 
   const dataCss = {
     display: "flex",
@@ -25,6 +26,36 @@ const Home = () => {
     width: "100%",
     marginTop: 10,
     color: "rgba(230, 230, 230, 0.842)",
+  };
+
+  const findLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        console.log(pos.coords.latitude);
+        console.log(pos.coords.longitude);
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=a1595a21bdd184196d3b23e71546a6be&units=metric`;
+        axios
+          .get(url)
+          .then((doc) => {
+            console.log(doc.data);
+            const iconcode = doc.data.weather[0].icon;
+            setWeatherIcon(
+              `https://openweathermap.org/img/wn/${iconcode}@2x.png`
+            );
+            setData(true);
+            setLoad(true);
+            setTimeout(() => setLoad(false), 1000);
+            setWeatherDataMain(doc.data.main);
+            setWeatherData(doc.data);
+            setWeather(doc.data.weather[0]);
+            setWind(doc.data.wind);
+          })
+          .catch((err) => console.log(err));
+      });
+    } else {
+      console.log("Location not suppprted");
+      // x.innerHTML = "Geolocation is not supported by this browser.";
+    }
   };
 
   const search = () => {
@@ -36,11 +67,13 @@ const Home = () => {
         console.log(doc.data);
         const iconcode = doc.data.weather[0].icon;
         setWeatherIcon(`https://openweathermap.org/img/wn/${iconcode}@2x.png`);
+        setData(true);
+        setLoad(true);
+        setTimeout(() => setLoad(false), 1000);
         setWeatherDataMain(doc.data.main);
         setWeatherData(doc.data);
         setWeather(doc.data.weather[0]);
         setWind(doc.data.wind);
-        setData(true);
       })
       .catch((err) => console.log(err));
     setSearchValue("");
@@ -52,13 +85,19 @@ const Home = () => {
         <Input
           className="searchBarStyle"
           suffix={
-            <Link to="/filter">
-              <Button shape="circle" size="small" />
-            </Link>
+            <Tooltip
+              placement="bottom"
+              title="Use your current location"
+              color="#008080"
+            >
+              <div className="iconWrapper" onClick={findLocation}>
+                <img src={Pin} alt="pin" />
+              </div>
+            </Tooltip>
           }
           prefix={<SearchOutlined style={{ color: "black", fontSize: 20 }} />}
           size="default"
-          placeholder="Search...."
+          placeholder="Search your city...."
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           onPressEnter={search}
@@ -70,7 +109,7 @@ const Home = () => {
         </div>
       ) : (
         <div className="cardHolder">
-          <Card className="weatherCard">
+          <Card className="weatherCard" loading={load}>
             <div className="placeName">{weatherData.name}</div>
             <div className="tempDisplay">
               {!weatherDataMain ? null : (

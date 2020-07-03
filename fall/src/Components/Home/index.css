@@ -91,11 +91,11 @@
 .statsHolder {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   padding: 20px;
   padding-top: 0px;
-  height: 200px;
+  height: 35%;
   width: 100%;
 }
 
@@ -121,7 +121,8 @@
   height: 60px;
 }
 
-.imageWrapper img {
+.imageWrapper img,
+.iconWrapper img {
   width: 30px;
   height: 30px;
 }
