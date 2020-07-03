@@ -5,6 +5,9 @@ import { Input, Button, Card } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import axios from "axios";
 import Searching from "./Assets/search.svg";
+import Insta from "./Assets/insta.svg";
+import Git from "./Assets/git.svg";
+import In from "./Assets/in.svg";
 
 const Home = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -21,6 +24,7 @@ const Home = () => {
     alignItems: "center",
     width: "100%",
     marginTop: 10,
+    color: "rgba(230, 230, 230, 0.842)",
   };
 
   const search = () => {
@@ -80,7 +84,13 @@ const Home = () => {
                 </div>
               )}
               {!weatherIcon ? null : (
-                <div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "column",
+                  }}
+                >
                   <img
                     className="weatherImage"
                     src={weatherIcon}
@@ -128,6 +138,35 @@ const Home = () => {
           </div>
         </div>
       )}
+      <div className="linkHolder">
+        <a
+          href="https://www.instagram.com/im_ajal/?hl=en"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="imageWrapper">
+            <img src={Insta} alt="insta" />
+          </div>
+        </a>
+        <a
+          href="https://github.com/Ajal333"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="imageWrapper">
+            <img src={Git} alt="git" />
+          </div>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/ajal-p-95537a191/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="imageWrapper">
+            <img src={In} alt="in" />
+          </div>
+        </a>
+      </div>
     </div>
   );
 };
