@@ -5,7 +5,7 @@ import "./index.css";
 const PNF = () => {
   return (
     <div className="mainDiv">
-      <img className="image" src={Image} alt="404"></img>
+      <img className="image" src={Image} alt="404 Page not found"></img>
     </div>
   );
 };
